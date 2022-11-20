@@ -1,0 +1,32 @@
+<header class="header flex justify-between items-center flex-nowrap">
+    <div class="container header-content flex justify-between items-center flex-rap">
+        <div>
+            <img src="./assets/img/brand.svg" alt="Mascota Feliz" class="h-9" />
+        </div>
+
+        <div class="flex justify-between items-center flex-nowrap">
+            <nav class="flex justify-between items-center flex-nowrap mr-7">
+                <a
+                    class="header-link text-gray-300 cursor-pointer text-sm"
+                    routerLink=""
+                    routerLinkActive="active"
+                    [routerLinkActiveOptions]="{ exact: true }"
+                    >Inicio</a
+                >
+                <a class="header-link text-gray-300 cursor-pointer text-sm" routerLink="store/services" routerLinkActive="active">Servicios</a>
+                <a class="header-link text-gray-300 cursor-pointer text-sm" routerLink="store/products" routerLinkActive="active">Productos</a>
+                <a class="header-link text-gray-300 cursor-pointer text-sm" routerLink="store/plans" routerLinkActive="active">Planes</a>
+                <a class="header-link text-gray-300 cursor-pointer text-sm" routerLink="store/plans" routerLinkActive="active">Sobre</a>
+            </nav>
+
+            <div class="flex justify-between items-center">
+                <a class="btn bg-transparent border-zinc-400 text-zinc-400 hover:bg-zinc-400 hover:text-white mr-5" routerLink="auth/register">
+                    Crear Cuenta
+                </a>
+                <a class="btn bg-sky-400 border-sky-400 text-white hover:bg-sky-500 hover:text-white" routerLink="auth/login">
+                    Iniciar Sesión</a
+                >
+            </div>
+        </div>
+    </div>
+</header>
