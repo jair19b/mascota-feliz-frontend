@@ -1,0 +1,30 @@
+<main class="main-content-centered">
+    <div class="rounded-lg bg-white text-black p-5 w-[30%]">
+        <img src="/assets/img/brand.svg" alt="brand" class="w-36 mb-9 mx-auto" />
+        <h1 class="text-center font-bold text-xl my-8">Iniciar Sesión</h1>
+        <form>
+            <div class="input-group">
+                <input type="email" class="control-input icon-right" formControlName="email" id="loginEmail" placeholder="Correo electrónico" />
+                <label for="loginEmail" class="input-icon"><span class="bi bi-envelope-fill"></span></label>
+                <span class="input-error"></span>
+            </div>
+            <div class="input-group">
+                <input
+                    type="password"
+                    class="control-input icon-right"
+                    formControlName="password"
+                    id="loginPassword"
+                    placeholder="Contraseña" />
+                <label for="loginPassword" class="input-icon"><span class="bi bi-unlock-fill"></span></label>
+                <span class="input-error"></span>
+            </div>
+            <div class="py-8 text-center">
+                <a routerLink="auth/forgot-password" class="block">Olvidé mi contraseña</a>
+                <span>¿No eres cliente? <a routerLink="auth/register" class="text-sky-400">registrate como cliente</a></span>
+            </div>
+            <button type="submit" class="btn btn-primary block mx-auto">
+                Entrar a Mi Cuenta <span class="bi bi-arrow-right-short"></span>
+            </button>
+        </form>
+    </div>
+</main>
