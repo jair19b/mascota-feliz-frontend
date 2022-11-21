@@ -6,7 +6,7 @@ import { Observable } from "rxjs";
     providedIn: "root"
 })
 export class HttpServiceService {
-    url = "http://[::1]:3000/";
+    url = "http://localhost:3000/";
 
     constructor(private http: HttpClient) {}
 
@@ -40,16 +40,16 @@ export class HttpServiceService {
         return this.http.patch(url, convertirJson, opcionesHttp);
     }
 
-    obetenerDatosFilter(url: string, filtro: any): Observable<any> {
+    obetenerDatosFilter(path: string, filtro: any): Observable<any> {
         const parametros = new HttpParams().append("filter", JSON.stringify(filtro));
         const opcionesHttp = { params: parametros };
-        return this.http.get(url, opcionesHttp);
+        return this.http.get(this.url + path, opcionesHttp);
     }
 
-    postDatos(url: string, datos: any): Observable<any> {
+    postDatos(path: string, datos: any): Observable<any> {
         const opcionesHttp = { headers: new HttpHeaders({ "Content-type": "application/json;charset=utf-8" }) };
         const convertirJson = JSON.stringify(datos);
-        return this.http.post(url, convertirJson, opcionesHttp);
+        return this.http.post(this.url + path, convertirJson, opcionesHttp);
     }
 
     actualizarDatos(url: string, datos: any, filtro?: string, tipoFiltro?: string): Observable<any> {
