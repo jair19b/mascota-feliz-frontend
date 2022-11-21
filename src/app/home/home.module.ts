@@ -4,9 +4,11 @@ import { IndexComponent } from "./components/index.component";
 import { MainContentComponent } from "./components/main-content.component";
 import { ServiciosComponent } from "./components/servicios.component";
 import { PlanesComponent } from "./components/planes.component";
+import { FormContactComponent } from "./components/form.contact.component";
+import { InfoPageComponent } from "./components/info-page.component";
 
 @NgModule({
-    declarations: [IndexComponent, MainContentComponent, ServiciosComponent, PlanesComponent],
+    declarations: [IndexComponent, MainContentComponent, ServiciosComponent, PlanesComponent, FormContactComponent, InfoPageComponent],
     exports: [IndexComponent],
     imports: [CommonModule]
 })

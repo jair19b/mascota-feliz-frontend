@@ -8,19 +8,50 @@
 }
 
 .btn {
-    display: inline-block;
-    padding: 0.625rem 0.75rem;
-    border-radius: 0.5rem;
-    border-style: solid;
-    border-width: 1px;
-    text-align: center;
-    font-size: 0.875rem;
-    font-weight: 700;
-    transition: all 0.2s ease-in;
-    line-height: 1;
-    cursor: pinter;
-    &:active,
-    &:focus {
-        outline: none;
+    @apply inline-block py-2.5 px-3 border border-transparent border-solid text-center text-sm font-bold transition leading-none cursor-pointer hover:outline-none focus:outline-none rounded-lg;
+}
+
+.btn-primary {
+    @apply bg-sky-400 text-white border-sky-400 hover:bg-sky-500 hover:border-sky-500;
+}
+
+.btn-secondary-outline {
+    @apply border-zinc-400 text-zinc-400 hover:bg-zinc-400 hover:text-white;
+}
+
+.btn-secondary {
+    @apply border-zinc-400 bg-zinc-400 text-white hover:bg-zinc-500 hover:border-zinc-500;
+}
+
+.input-group {
+    @apply relative block mb-2 p-0;
+}
+
+.control-input {
+    @apply text-left block w-full py-2.5 px-1.5 border border-gray-300 rounded-lg bg-white text-gray-500 text-sm leading-none transition focus:border-sky-300 focus:outline-none;
+}
+
+.control-input.icon-right {
+    @apply pr-8;
+
+    & + .input-icon {
+        @apply absolute top-0 right-0 bottom-0 w-8 flex justify-center items-center;
+    }
+}
+
+.control-input.icon-left {
+    @apply pl-8;
+
+    & + .input-icon {
+        @apply absolute top-0 left-0 bottom-0 w-8 flex justify-center items-center;
+    }
+}
+
+.input-group.error {
+    .control-input {
+        @apply text-red-500 border-red-500 hover:border-red-400;
+    }
+    .input-icon {
+        @apply text-red-50;
     }
 }

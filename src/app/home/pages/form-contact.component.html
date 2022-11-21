@@ -1,0 +1,35 @@
+<div class="form-contact rounded-lg">
+    <h2 class="form-contact__title">Contactanos</h2>
+    <p class="text-center my-5 text-sm">Para más información envianos un mensaje</p>
+    <form class="form-contact__form">
+        <div class="input-group">
+            <input type="text" class="control-input icon-right" formControlName="name" placeholder="Nombres" id="fcName" />
+            <label for="fcName" class="input-icon"><span class="bi bi-person-circle"></span></label>
+            <span class="input-error"></span>
+        </div>
+        <div class="input-group">
+            <input type="text" class="control-input icon-right" formControlName="lastName" placeholder="Apellidos" id="fcLastName" />
+            <label for="fcLastName" class="input-icon"><span class="bi bi-person-circle"></span></label>
+            <span class="input-error"></span>
+        </div>
+        <div class="input-group">
+            <input type="tel" class="control-input icon-right" formControlName="cellphone" placeholder="Teléfono" id="fcPhone" />
+            <label for="fcPhone" class="input-icon"><span class="bi bi-telephone-fill"></span></label>
+            <span class="input-error"></span>
+        </div>
+        <div class="input-group">
+            <input type="email" class="control-input icon-right" formControlName="email" placeholder="Correo electrónico" id="fcEmail" />
+            <label for="fcEmail" class="input-icon"><span class="bi bi-envelope-fill"></span></label>
+            <span class="input-error"></span>
+        </div>
+        <div class="input group w-full">
+            <textarea
+                class="control-input min-h-[110px] mb-4"
+                formControlName="message"
+                id="fcMessage"
+                placeholder="Escribenos un pequeño mensaje"></textarea>
+            <span class="input-error"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Enviar Mensaje <span class="bi bi-arrow-right-short"></span></button>
+    </form>
+</div>
