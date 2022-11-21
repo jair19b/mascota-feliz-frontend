@@ -1,5 +1,2 @@
-<app-header></app-header>
-<main class="pt-[3.75rem]">
-    <router-outlet></router-outlet>
-</main>
-<app-footer></app-footer>
+<app-layout *ngIf="login == false"></app-layout>
+<app-admin-layout *ngIf="login == true"></app-admin-layout>

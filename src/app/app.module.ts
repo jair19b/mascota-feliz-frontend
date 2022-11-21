@@ -12,12 +12,23 @@ import { HttpClientModule } from "@angular/common/http";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { SharedModule } from "./shared/shared.module";
 import { HomeModule } from "./home/home.module";
+import { DasboardRoutingModule } from "./dasboard/dasboard-routing.module";
+import { AdminRoutingModule } from "./admin/admin-routing.module";
 
 registerLocaleData(es);
 
 @NgModule({
     declarations: [AppComponent],
-    imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, BrowserAnimationsModule, SharedModule, HomeModule],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        SharedModule,
+        HomeModule,
+        AdminRoutingModule
+    ],
     providers: [{ provide: NZ_I18N, useValue: es_ES }],
     bootstrap: [AppComponent]
 })
