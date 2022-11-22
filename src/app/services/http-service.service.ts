@@ -10,74 +10,35 @@ export class HttpServiceService {
 
     constructor(private http: HttpClient) {}
 
-    obtenerDatos(url: string, filtro?: string, tipoFiltro: string = "documento"): Observable<any> {
-        let filtroReal = null;
-        if (filtro) {
-            const filtroNombre = { where: { nombre: { like: filtro, options: "i" } } };
-            const filtroDocumento = { where: { documento: { like: filtro, options: "i" } } };
-            const filtroPlaca = { where: { placa: { like: filtro, options: "i" } } };
-            if (tipoFiltro == "documento") {
-                filtroReal = filtroDocumento;
-            } else if (tipoFiltro == "placa") {
-                filtroReal = filtroPlaca;
-            } else if (tipoFiltro == "nombre") {
-                filtroReal = filtroNombre;
-            } else {
-                filtroReal = filtroDocumento;
-            }
-            const parametros = new HttpParams().append("filter", JSON.stringify(filtroReal));
-            const opcionesHttp = { params: parametros };
-            return this.http.get(url, opcionesHttp);
-        } else {
-            return this.http.get(url);
-        }
-    }
-
     modificarDatosFilter(url: string, data: any, filtro: any): Observable<any> {
+        // let token = localStorage.getItem("token") || "";
+        const _headers = new HttpHeaders({ "Content-type": "application/json;charset=utf-8" });
         const parametros = new HttpParams().append("filter", JSON.stringify(filtro));
-        const opcionesHttp = { params: parametros, headers: new HttpHeaders({ "Content-type": "application/json;charset=utf-8" }) };
+        const opcionesHttp = { params: parametros, headers: _headers };
         const convertirJson = JSON.stringify(data);
         return this.http.patch(url, convertirJson, opcionesHttp);
     }
 
     obetenerDatosFilter(path: string, filtro: any): Observable<any> {
+        let token = localStorage.getItem("token") || "";
+        const _headers = new HttpHeaders({ "Content-type": "application/json;charset=utf-8", authorization: `bearer ${token}` });
         const parametros = new HttpParams().append("filter", JSON.stringify(filtro));
-        const opcionesHttp = { params: parametros };
+        const opcionesHttp = { params: parametros, headers: _headers };
         return this.http.get(this.url + path, opcionesHttp);
     }
 
     postDatos(path: string, datos: any): Observable<any> {
-        const opcionesHttp = { headers: new HttpHeaders({ "Content-type": "application/json;charset=utf-8" }) };
+        let token = localStorage.getItem("token") || "";
+        const headers = new HttpHeaders({ "Content-type": "application/json;charset=utf-8", authorization: `bearer ${token}` });
+        const opcionesHttp = { headers: headers };
         const convertirJson = JSON.stringify(datos);
         return this.http.post(this.url + path, convertirJson, opcionesHttp);
     }
 
-    actualizarDatos(url: string, datos: any, filtro?: string, tipoFiltro?: string): Observable<any> {
-        let filtroReal = null;
-        if (filtro) {
-            const filtroNombre = { where: { nombre: { like: filtro, options: "i" } } };
-            const filtroDocumento = { where: { documento: { like: filtro, options: "i" } } };
-            const filtroPlaca = { where: { placa: { like: filtro, options: "i" } } };
-            if (tipoFiltro == "documento") {
-                filtroReal = filtroDocumento;
-            } else if (tipoFiltro == "placa") {
-                filtroReal = filtroPlaca;
-            } else if (tipoFiltro == "nombre") {
-                filtroReal = filtroNombre;
-            } else {
-                filtroReal = filtroDocumento;
-            }
-            const parametros = new HttpParams().append("filter", JSON.stringify(filtroReal));
-            const opcionesHttp = { params: parametros, headers: new HttpHeaders({ "Content-type": "application/json;charset=utf-8" }) };
-            const convertirJson = JSON.stringify(datos);
-            return this.http.put(url, convertirJson, opcionesHttp);
-        } else {
-            const convertirJson = JSON.stringify(datos);
-            return this.http.put(url, convertirJson);
-        }
-    }
-
     eliminarDatos(path: string): Observable<any> {
-        return this.http.delete(this.url + path);
+        let token = localStorage.getItem("token") || "";
+        const _headers = new HttpHeaders({ "Content-type": "application/json;charset=utf-8", authorization: `bearer ${token}` });
+        const opcionesHttp = { headers: _headers };
+        return this.http.delete(this.url + path, opcionesHttp);
     }
 }

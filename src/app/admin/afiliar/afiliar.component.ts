@@ -21,10 +21,11 @@ export class AfiliarComponent implements OnInit {
         address: ["", this.vs.validAddress],
         date: [""],
         description: ["", this.vs.validRequired],
-        ownerId: ["637bd625440f7a0440053946"]
+        ownerId: ["", this.vs.validRequired]
     });
 
     isDisable: boolean = false;
+    users: any[] = [];
 
     constructor(
         public fb: FormBuilder,
@@ -36,6 +37,10 @@ export class AfiliarComponent implements OnInit {
 
     ngOnInit(): void {
         this.requestForm.get("date")?.setValue(Date.now());
+        this.httpService.obetenerDatosFilter("users", { where: { rol: "client" } }).subscribe({
+            next: res => (this.users = res),
+            error: err => console.error(err)
+        });
     }
 
     campoEsValido(campo: string) {

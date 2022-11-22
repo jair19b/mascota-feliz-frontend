@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { HttpServiceService } from "../../services/http-service.service";
 import { NzModalService } from "ng-zorro-antd/modal";
+const moment = require("moment");
 
 @Component({
     selector: "admin-listar",
@@ -14,7 +15,7 @@ export class ListarComponent implements OnInit {
     constructor(public httpServiceService: HttpServiceService, private modalService: NzModalService) {}
 
     ngOnInit(): void {
-        const filtro = { where: { state: "pending" }, include: [{ relation: "pet" }] };
+        const filtro = { where: { state: "pending" }, include: [{ relation: "pet" }, { relation: "owner" }] };
         this.httpServiceService.obetenerDatosFilter("requests", filtro).subscribe({
             next: response => {
                 console.log(response);
@@ -49,9 +50,14 @@ export class ListarComponent implements OnInit {
                             this.revisiones = copia;
                             resolve(true);
                         },
-                        error: err => reject(false)
+                        error: err => reject(err)
                     });
-                }).catch(() => console.error("Error al momneto de cerrar el modal"))
+                }).catch(err =>
+                    this.modalService.error({
+                        nzTitle: "Error",
+                        nzContent: err.error.error.message
+                    })
+                )
         });
     }
 
@@ -65,5 +71,9 @@ export class ListarComponent implements OnInit {
 
     handleCancel(): void {
         this.isVisible = false;
+    }
+
+    formatDate(date: string) {
+        return moment(date).startOf("day").fromNow();
     }
 }

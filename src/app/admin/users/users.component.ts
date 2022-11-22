@@ -49,9 +49,14 @@ export class UsersComponent implements OnInit {
                             this.revisiones = copia;
                             resolve(true);
                         },
-                        error: err => reject(false)
+                        error: err => reject(err)
                     });
-                }).catch(() => console.error("Error al momneto de cerrar el modal"))
+                }).catch(err =>
+                    this.modalService.error({
+                        nzTitle: "Error",
+                        nzContent: err.error.error.message
+                    })
+                )
         });
     }
 

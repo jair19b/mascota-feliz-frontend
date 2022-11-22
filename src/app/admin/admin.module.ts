@@ -7,12 +7,13 @@ import { AdministrarComponent } from "./administrar/administrar.component";
 import { AdminRoutingModule } from "./admin-routing.module";
 import { ReactiveFormsModule } from "@angular/forms";
 import { NzModalModule } from "ng-zorro-antd/modal";
-import { UsersComponent } from './users/users.component';
-import { PedidosComponent } from './pedidos/pedidos.component';
+import { UsersComponent } from "./users/users.component";
+import { PedidosComponent } from "./pedidos/pedidos.component";
+import { SharedModule } from "../shared/shared.module";
 
 @NgModule({
     declarations: [AsideComponent, ListarComponent, AfiliarComponent, AdministrarComponent, UsersComponent, PedidosComponent],
-    imports: [CommonModule, ReactiveFormsModule, AdminRoutingModule, NzModalModule],
+    imports: [CommonModule, ReactiveFormsModule, AdminRoutingModule, NzModalModule, SharedModule],
     exports: [AsideComponent]
 })
 export class AdminModule {}

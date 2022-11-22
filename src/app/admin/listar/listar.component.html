@@ -3,8 +3,8 @@
         <table class="w-full whitespace-no-wrap">
             <thead class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">
                 <tr>
-                    <td class="px-4 py-6">Nombre Mascota</td>
-                    <td class="px-4 py-6">Costo Revision</td>
+                    <td class="px-4 py-6">Mascota</td>
+                    <td class="px-4 py-6">Propietario</td>
                     <td class="px-4 py-6">Estado</td>
                     <td class="px-4 py-6">Fecha Solicitud</td>
                     <td class="px-4 py-6">Aciones</td>
@@ -28,14 +28,16 @@
                             </div>
                         </div>
                     </td>
-                    <td class="px-4 py-3"><span class="text-sm">$ 0</span></td>
+                    <td class="px-4 py-3">
+                        <span class="text-sm">{{ revision.owner.name }}</span>
+                    </td>
                     <td class="px-4 py-3">
                         <span class="inline-flex px-2 text-xs font-medium leading-5 rounded-full text-purple-700 bg-purple-100">{{
                             revision.state
                         }}</span>
                     </td>
                     <td class="px-4 py-3">
-                        <span class="text-sm">{{ revision.date }}</span>
+                        <span class="text-sm">{{ formatDate(revision.date) }}</span>
                     </td>
                     <td class="px-4 py-3">
                         <div class="flex items-center space-x-4">
