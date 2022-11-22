@@ -2,19 +2,16 @@
     <div class="rounded-lg bg-white text-black p-5 w-[30%]">
         <img src="/assets/img/brand.svg" alt="brand" class="w-36 mb-9 mx-auto" />
         <h1 class="text-center font-bold text-xl my-8">Iniciar Sesión</h1>
+        <nz-alert nzType="error" nzMessage="{{ errorM }}" nzShowIcon *ngIf="errorM"></nz-alert>
         <form [formGroup]="formLogin" (ngSubmit)="enviar()">
             <div class="{{ campoEsValido('email') ? 'input-group error' : 'input-group' }}">
-                <input type="email" class="control-input icon-right" formControlName="email" id="loginEmail" placeholder="Correo electrónico" />
+                <input type="email" class="control-input icon-right" formControlName="email" placeholder="Correo electrónico" />
                 <label for="loginEmail" class="input-icon"><span class="bi bi-envelope-fill"></span></label>
                 <span class="input-message" *ngIf="campoEsValido('email')">{{ getError("email") }}</span>
             </div>
+
             <div class="{{ campoEsValido('password') ? 'input-group error' : 'input-group' }}">
-                <input
-                    type="password"
-                    class="control-input icon-right"
-                    formControlName="password"
-                    id="loginPassword"
-                    placeholder="Contraseña" />
+                <input type="password" class="control-input icon-right" formControlName="password" placeholder="Contraseña" />
                 <label for="loginPassword" class="input-icon"><span class="bi bi-unlock-fill"></span></label>
                 <span class="input-message" *ngIf="campoEsValido('password')">{{ getError("password") }}</span>
             </div>

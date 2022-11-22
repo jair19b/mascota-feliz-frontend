@@ -8,26 +8,12 @@ import { AuthService } from "./../services/auth.service";
     providedIn: "root"
 })
 export class AdminAuthGuard implements CanActivate, CanLoad {
-    userProfile: UserProfile | null;
-
-    constructor(private authService: AuthService, private router: Router) {
-        this.userProfile = this.authService.user;
-    }
+    constructor(private authService: AuthService, private router: Router) {}
 
     canActivate(): Observable<boolean> | boolean {
-        if (!this.userProfile) {
-            this.router.navigate(["auth/login"]);
-        } else if (this.userProfile.rol != "admin") {
-            this.router.navigate(["auth/login"]);
-        }
-        return true;
+        return this.authService.validarSession();
     }
     canLoad(): Observable<boolean> | boolean {
-        if (!this.userProfile) {
-            this.router.navigate(["auth/login"]);
-        } else if (this.userProfile.rol != "admin") {
-            this.router.navigate(["auth/login"]);
-        }
-        return true;
+        return this.authService.validarSession();
     }
 }

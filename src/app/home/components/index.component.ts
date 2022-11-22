@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "./../../services/auth.service";
-import { UserProfile } from "./../../interfaces/perfiles.interface";
 
 @Component({
     selector: "app-index",
@@ -8,15 +7,17 @@ import { UserProfile } from "./../../interfaces/perfiles.interface";
     styleUrls: ["../styles/index.component.scss"]
 })
 export class IndexComponent implements OnInit {
-    loggedIn: boolean = false;
-    profile: UserProfile | null;
-
-    constructor(public auth: AuthService) {
-        this.profile = this.auth.user;
+    get profile() {
+        return this.authService.user;
     }
 
+    get loggedIn() {
+        return this.authService.validarSession();
+    }
+
+    constructor(public authService: AuthService) {}
+
     ngOnInit(): void {
-        if (this.profile) this.loggedIn = true;
-        this.auth.redirect();
+        this.authService.redirect();
     }
 }

@@ -1,1 +1,62 @@
-<p>register works!</p>
+<main class="main-content-centered">
+    <div class="rounded-lg bg-white text-black p-5 w-[48%]">
+        <img src="/assets/img/brand.svg" alt="brand" class="w-36 mb-9 mx-auto" />
+        <h1 class="text-center font-bold text-xl my-8">Crear Cuentaio</h1>
+        <nz-alert nzType="error" nzMessage="{{ errorM }}" nzShowIcon *ngIf="errorM"></nz-alert>
+        <form [formGroup]="formRegister" (ngSubmit)="enviar()">
+            <div class="form-group group-two">
+                <div class="{{ campoEsValido('name') ? 'input-group error' : 'input-group' }}">
+                    <input type="text" class="control-input icon-right" formControlName="name" placeholder="Nombres" />
+                    <span class="input-message" *ngIf="campoEsValido('name')">{{ getError("name") }}</span>
+                </div>
+                <div class="{{ campoEsValido('lastName') ? 'input-group error' : 'input-group' }}">
+                    <input type="text" class="control-input icon-right" formControlName="lastName" placeholder="Apellidos" />
+                    <span class="input-message" *ngIf="campoEsValido('lastName')">{{ getError("lastName") }}</span>
+                </div>
+                <div class="{{ campoEsValido('cedula') ? 'input-group error' : 'input-group' }}">
+                    <input type="text" class="control-input icon-right" formControlName="cedula" placeholder="Cedula" />
+                    <span class="input-message" *ngIf="campoEsValido('cedula')">{{ getError("cedula") }}</span>
+                </div>
+                <div class="{{ campoEsValido('birthday') ? 'input-group error' : 'input-group' }}">
+                    <input type="date" class="control-input" formControlName="birthday" placeholder="Fecha de Nacimiento" />
+                    <span class="input-message" *ngIf="campoEsValido('birthday')">{{ getError("birthday") }}</span>
+                </div>
+
+                <div class="{{ campoEsValido('cellphone') ? 'input-group error' : 'input-group' }}">
+                    <input type="tel" class="control-input icon-right" formControlName="cellphone" placeholder="Telefono" />
+                    <span class="input-message" *ngIf="campoEsValido('cellphone')">{{ getError("cellphone") }}</span>
+                </div>
+                <div class="{{ campoEsValido('city') ? 'input-group error' : 'input-group' }}">
+                    <input type="text" class="control-input icon-right" formControlName="city" placeholder="Ciudad" />
+                    <span class="input-message" *ngIf="campoEsValido('city')">{{ getError("city") }}</span>
+                </div>
+                <div class="{{ campoEsValido('address') ? 'input-group error' : 'input-group' }}">
+                    <input type="text" class="control-input icon-right" formControlName="address" placeholder="Direccion" />
+                    <span class="input-message" *ngIf="campoEsValido('address')">{{ getError("address") }}</span>
+                </div>
+                <div class="{{ campoEsValido('gender') ? 'input-group error' : 'input-group' }}">
+                    <select class="control-input icon-right" formControlName="gender">
+                        <option value="">Selecciona tu sexo</option>
+                        <option value="M">Masculino</option>
+                        <option value="F">Femenino</option>
+                    </select>
+                    <span class="input-message" *ngIf="campoEsValido('gender')">{{ getError("gender") }}</span>
+                </div>
+            </div>
+            <div class="{{ campoEsValido('email') ? 'input-group error' : 'input-group' }}">
+                <input type="email" class="control-input icon-right" formControlName="email" placeholder="Correo electrónico" />
+                <span class="input-message" *ngIf="campoEsValido('email')">{{ getError("email") }}</span>
+            </div>
+            <div class="{{ campoEsValido('password') ? 'input-group error' : 'input-group' }}">
+                <input type="password" class="control-input icon-right" formControlName="password" placeholder="Contraseña" />
+                <span class="input-message" *ngIf="campoEsValido('password')">{{ getError("password") }}</span>
+            </div>
+            <div class="flex justify-center py-7">
+                <button type="submit" class="btn btn-primary block mx-auto">
+                    Crear Cuenta
+                    <span class="bi bi-arrow-right-short"></span>
+                </button>
+            </div>
+        </form>
+    </div>
+</main>

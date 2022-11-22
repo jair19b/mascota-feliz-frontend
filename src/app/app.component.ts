@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "./services/auth.service";
-import { UserProfile } from "./interfaces/perfiles.interface";
 
 @Component({
     selector: "app-root",
@@ -8,18 +7,15 @@ import { UserProfile } from "./interfaces/perfiles.interface";
     styleUrls: ["./app.component.scss"]
 })
 export class AppComponent implements OnInit {
-    profile: UserProfile | null;
-    loggedIn: boolean = false;
-
-    constructor(private authService: AuthService) {
-        this.profile = this.authService.user;
+    get profile() {
+        return this.authService.user;
     }
 
-    ngOnInit(): void {
-        if (!this.profile) {
-            this.loggedIn = false;
-        } else {
-            this.loggedIn = true;
-        }
+    get loggedIn() {
+        return this.authService.validarSession();
     }
+
+    constructor(private authService: AuthService) {}
+
+    ngOnInit(): void {}
 }

@@ -5,27 +5,33 @@ import { HttpServiceService } from "./http-service.service";
 
 @Injectable({ providedIn: "root" })
 export class AuthService {
-    user: UserProfile | null;
-    loginError: any;
-    registerError: any;
+    private _user!: UserProfile | null;
+    private _loginError: any;
+    private _registerError: any;
 
-    constructor(public httpServiceService: HttpServiceService, public router: Router) {
-        const localToken = localStorage.getItem("token");
-        const localProfile = localStorage.getItem("profile");
-        if (localToken && localProfile) {
-            this.user = JSON.parse(localProfile);
-        } else {
-            this.user = null;
-        }
+    get user() {
+        return { ...this._user };
     }
 
+    get loginError() {
+        return this._loginError;
+    }
+
+    get registerError() {
+        return this._registerError;
+    }
+
+    constructor(public http: HttpServiceService, public router: Router) {}
+
     login(email: string, password: string) {
-        this.httpServiceService.postDatos("auth/login", { email, password }).subscribe({
+        this.http.postDatos("auth/login", { email, password }).subscribe({
             next: response => {
                 if (response.token) {
                     localStorage.setItem("token", response.token);
                     delete response["token"];
                     localStorage.setItem("profile", JSON.stringify(response));
+                    this._user = response;
+
                     if (response.rol == "admin") {
                         this.router.navigate(["dashboard"]);
                     }
@@ -38,7 +44,21 @@ export class AuthService {
                 }
             },
             error: err => {
-                this.loginError = err;
+                this._loginError = err.error.error.message;
+            }
+        });
+    }
+
+    register(datos: any) {
+        console.log(datos);
+        this.http.postDatos("auth/register", datos).subscribe({
+            next: response => {
+                console.log(response);
+                this.router.navigateByUrl("/auth/login");
+            },
+            error: err => {
+                this._registerError = err.error.error.message;
+                console.log(err);
             }
         });
     }
@@ -55,5 +75,21 @@ export class AuthService {
                 this.router.navigate(["user"]);
             }
         }
+    }
+
+    validarSession(): boolean {
+        const localToken = localStorage.getItem("token");
+        const localProfile = localStorage.getItem("profile");
+        if (localToken && localProfile) {
+            this._user = JSON.parse(localProfile);
+            return true;
+        }
+        return false;
+    }
+
+    logout() {
+        this._user = null;
+        localStorage.clear();
+        this.router.navigateByUrl("");
     }
 }

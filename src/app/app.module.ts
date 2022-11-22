@@ -10,11 +10,10 @@ import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { HomeModule } from "./home/home.module";
-import { AdminRoutingModule } from "./admin/admin-routing.module";
 import { AdminModule } from "./admin/admin.module";
 import { ClientModule } from "./client/client.module";
-import { ClientRoutingModule } from "./client/client-routing.module";
 import { LayoutModule } from "./layout/layout.module";
+import { AuthModule } from "./auth/auth.module";
 
 registerLocaleData(es);
 
@@ -28,11 +27,10 @@ registerLocaleData(es);
         BrowserAnimationsModule,
 
         HomeModule,
-        AdminRoutingModule,
         AdminModule,
-        ClientRoutingModule,
         ClientModule,
-        LayoutModule
+        LayoutModule,
+        AuthModule
     ],
     providers: [{ provide: NZ_I18N, useValue: es_ES }],
     bootstrap: [AppComponent]

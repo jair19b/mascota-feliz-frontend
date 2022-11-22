@@ -4,15 +4,14 @@ import { UserProfile } from "./../../interfaces/perfiles.interface";
 
 @Component({
     selector: "admin-layout",
-    templateUrl: "./admin.component.html",
-    styleUrls: ["./admin.component.scss"]
+    templateUrl: "./admin.component.html"
 })
 export class AdminComponent implements OnInit {
-    profile: UserProfile | null;
-
-    constructor(private aut: AuthService) {
-        this.profile = this.aut.user;
+    get user() {
+        return this.authService.user;
     }
+
+    constructor(private authService: AuthService) {}
 
     ngOnInit(): void {}
 }
