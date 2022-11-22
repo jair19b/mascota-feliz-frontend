@@ -60,6 +60,17 @@ export class ValidatorService {
         return null;
     }
 
+    validEmail(control: FormControl): ValidationErrors | null {
+        const valor = control.value?.trim();
+        if (!valor.match(/^[a-z0-9_-]+(?:.[a-z0-9_-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/gi)) {
+            return {
+                message: "Formato de email inválido"
+            };
+        }
+
+        return null;
+    }
+
     validRequired(control: FormControl): ValidationErrors | null {
         const valor = control.value?.trim();
         if (valor.length < 1) {

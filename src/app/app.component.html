@@ -1,2 +1,2 @@
-<app-layout *ngIf="login == false"></app-layout>
-<app-admin-layout *ngIf="login == true"></app-admin-layout>
+<app-admin-layout *ngIf="loggedIn == true"></app-admin-layout>
+<app-layout *ngIf="loggedIn == false"></app-layout>

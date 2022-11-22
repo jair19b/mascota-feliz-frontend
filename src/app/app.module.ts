@@ -14,11 +14,13 @@ import { SharedModule } from "./shared/shared.module";
 import { HomeModule } from "./home/home.module";
 import { DasboardRoutingModule } from "./dasboard/dasboard-routing.module";
 import { AdminRoutingModule } from "./admin/admin-routing.module";
+import { AdminLayoutComponent } from "./shared/admin-layout/admin-layout.component";
+import { AdminModule } from "./admin/admin.module";
 
 registerLocaleData(es);
 
 @NgModule({
-    declarations: [AppComponent],
+    declarations: [AppComponent, AdminLayoutComponent],
     imports: [
         BrowserModule,
         AppRoutingModule,
@@ -27,7 +29,8 @@ registerLocaleData(es);
         BrowserAnimationsModule,
         SharedModule,
         HomeModule,
-        AdminRoutingModule
+        AdminRoutingModule,
+        AdminModule
     ],
     providers: [{ provide: NZ_I18N, useValue: es_ES }],
     bootstrap: [AppComponent]

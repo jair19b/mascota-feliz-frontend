@@ -77,7 +77,7 @@ export class HttpServiceService {
         }
     }
 
-    eliminarDatos(url: string): Observable<any> {
-        return this.http.delete(url);
+    eliminarDatos(path: string): Observable<any> {
+        return this.http.delete(this.url + path);
     }
 }

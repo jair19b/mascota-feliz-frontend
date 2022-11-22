@@ -14,6 +14,8 @@ export class AuthService {
         const localProfile = localStorage.getItem("profile");
         if (localToken && localProfile) {
             this.user = JSON.parse(localProfile);
+        } else {
+            this.user = null;
         }
     }
 
