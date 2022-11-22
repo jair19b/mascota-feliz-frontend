@@ -49,12 +49,23 @@ export class AuthService {
         });
     }
 
+    verify(email: string, pin: string) {
+        this.http.postDatos("auth/veriy/account", { email, pin }).subscribe({
+            next: response => {
+                this.router.navigateByUrl("auth/login");
+            },
+            error: err => {
+                this._loginError = err.error.error.message;
+            }
+        });
+    }
+
     register(datos: any) {
         console.log(datos);
         this.http.postDatos("auth/register", datos).subscribe({
             next: response => {
                 console.log(response);
-                this.router.navigateByUrl("/auth/login");
+                this.router.navigateByUrl("/auth/verify");
             },
             error: err => {
                 this._registerError = err.error.error.message;
