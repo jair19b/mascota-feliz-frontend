@@ -5,7 +5,7 @@ import { HttpServiceService } from "./http-service.service";
 
 @Injectable({ providedIn: "root" })
 export class AuthService {
-    user: UserProfile | null = null;
+    user: UserProfile | null;
     loginError: any;
     registerError: any;
 
@@ -41,5 +41,19 @@ export class AuthService {
                 this.loginError = err;
             }
         });
+    }
+
+    redirect() {
+        if (this.user) {
+            if (this.user?.rol == "admin") {
+                this.router.navigate(["dashboard"]);
+            }
+            if (this.user?.rol == "advisor") {
+                this.router.navigate(["advisor"]);
+            }
+            if (this.user?.rol == "client") {
+                this.router.navigate(["user"]);
+            }
+        }
     }
 }

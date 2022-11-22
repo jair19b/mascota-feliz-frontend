@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
+import { AdminAuthGuard } from "./auth/val-auth.guard";
 import { IndexComponent } from "./home/components/index.component";
 
 const routes: Routes = [
@@ -14,11 +15,15 @@ const routes: Routes = [
     },
     {
         path: "dashboard",
-        loadChildren: () => import("./admin/admin.module").then(m => m.AdminModule)
+        loadChildren: () => import("./admin/admin.module").then(m => m.AdminModule),
+        canActivate: [AdminAuthGuard],
+        canLoad: [AdminAuthGuard]
     },
     {
         path: "user",
-        loadChildren: () => import("./client/client.module").then(m => m.ClientModule)
+        loadChildren: () => import("./client/client.module").then(m => m.ClientModule),
+        canActivate: [AdminAuthGuard],
+        canLoad: [AdminAuthGuard]
     },
     {
         path: "**",

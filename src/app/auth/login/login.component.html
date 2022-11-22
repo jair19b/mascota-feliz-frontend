@@ -3,12 +3,12 @@
         <img src="/assets/img/brand.svg" alt="brand" class="w-36 mb-9 mx-auto" />
         <h1 class="text-center font-bold text-xl my-8">Iniciar Sesión</h1>
         <form [formGroup]="formLogin" (ngSubmit)="enviar()">
-            <div class="input-group">
+            <div class="{{ campoEsValido('email') ? 'input-group error' : 'input-group' }}">
                 <input type="email" class="control-input icon-right" formControlName="email" id="loginEmail" placeholder="Correo electrónico" />
                 <label for="loginEmail" class="input-icon"><span class="bi bi-envelope-fill"></span></label>
-                <span class="input-message"></span>
+                <span class="input-message" *ngIf="campoEsValido('email')">{{ getError("email") }}</span>
             </div>
-            <div class="input-group">
+            <div class="{{ campoEsValido('password') ? 'input-group error' : 'input-group' }}">
                 <input
                     type="password"
                     class="control-input icon-right"
@@ -16,7 +16,7 @@
                     id="loginPassword"
                     placeholder="Contraseña" />
                 <label for="loginPassword" class="input-icon"><span class="bi bi-unlock-fill"></span></label>
-                <span class="input-message"></span>
+                <span class="input-message" *ngIf="campoEsValido('password')">{{ getError("password") }}</span>
             </div>
             <div class="py-8 text-center">
                 <a routerLink="auth/forgot-password" class="block">Olvidé mi contraseña</a>

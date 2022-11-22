@@ -8,7 +8,6 @@ import { UserProfile } from "./interfaces/perfiles.interface";
     styleUrls: ["./app.component.scss"]
 })
 export class AppComponent implements OnInit {
-    title = "mascota-feliz-frontend";
     profile: UserProfile | null;
     loggedIn: boolean = false;
 
