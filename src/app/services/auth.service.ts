@@ -50,7 +50,7 @@ export class AuthService {
     }
 
     verify(email: string, pin: string) {
-        this.http.postDatos("auth/veriy/account", { email, pin }).subscribe({
+        this.http.postDatos("auth/verify/account", { email, pin }).subscribe({
             next: response => {
                 this.router.navigateByUrl("auth/login");
             },
