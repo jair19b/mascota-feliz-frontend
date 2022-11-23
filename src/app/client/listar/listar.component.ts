@@ -12,6 +12,7 @@ const moment = require("moment");
 export class ListarComponent implements OnInit {
     revisiones: any[] = [];
     isVisible = false;
+    details: any;
 
     get user() {
         return this.authService.user;
@@ -66,7 +67,8 @@ export class ListarComponent implements OnInit {
         });
     }
 
-    showModal(): void {
+    showModal(e: any, datos: any): void {
+        this.details = datos;
         this.isVisible = true;
     }
 
