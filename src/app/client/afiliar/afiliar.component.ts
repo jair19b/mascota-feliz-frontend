@@ -3,6 +3,9 @@ import { ValidatorService } from "src/app/services/validator.service";
 import { FormGroup } from "@angular/forms";
 import { FormBuilder } from "@angular/forms";
 import { HttpServiceService } from "./../../services/http-service.service";
+import { NzModalService } from "ng-zorro-antd/modal";
+import { Router } from "@angular/router";
+import { AuthService } from "./../../services/auth.service";
 
 @Component({
     selector: "app-afiliar",
@@ -10,21 +13,6 @@ import { HttpServiceService } from "./../../services/http-service.service";
     styleUrls: ["./afiliar.component.scss"]
 })
 export class AfiliarComponent implements OnInit {
-    /**
- {
-  "city": "Bogotá",
-  "address": "cr 50 cl 34",
-  "date": "2022-11-21T19:42:18.906Z",
-  "ownerId": "637bd625440f7a0440053946",
-  "name": "Casi Luna",
-  "age": 3,
-  "breed": "Criolla",
-  "color": "Blanco",
-  "photo": "string",
-  "description": "Una perra muy loca"
-}
- */
-
     requestForm: FormGroup = this.fb.group({
         name: ["", this.vs.validName],
         age: ["", this.vs.validAgePet],
@@ -34,14 +22,29 @@ export class AfiliarComponent implements OnInit {
         address: ["", this.vs.validAddress],
         date: [""],
         description: ["", this.vs.validRequired],
-        ownerId: ["637bd625440f7a0440053946"]
+        ownerId: [""]
     });
 
     isDisable: boolean = false;
+    private _user: any;
+    private _errorM: any;
 
-    constructor(public fb: FormBuilder, public vs: ValidatorService, public httpService: HttpServiceService) {}
+    get errorM() {
+        return this._errorM;
+    }
+
+    constructor(
+        public fb: FormBuilder,
+        public vs: ValidatorService,
+        public httpService: HttpServiceService,
+        private router: Router,
+        private modalService: NzModalService,
+        private authService: AuthService
+    ) {}
 
     ngOnInit(): void {
+        this._user = this.authService.user;
+        this.requestForm.get("ownerId")?.setValue(this._user.uid);
         this.requestForm.get("date")?.setValue(Date.now());
     }
 
@@ -64,9 +67,27 @@ export class AfiliarComponent implements OnInit {
         this.httpService.postDatos("requests", this.requestForm.getRawValue()).subscribe({
             next: response => {
                 console.log(response);
+                this._errorM = "Solicitud realizada correctamente";
+                this.requestForm.reset({
+                    name: "",
+                    age: "",
+                    breed: "",
+                    color: "",
+                    city: "",
+                    address: "",
+                    date: "",
+                    description: "",
+                    ownerId: ""
+                });
+                setTimeout(() => {
+                    this._errorM = null;
+                }, 4000);
             },
             error: error => {
-                console.log(error);
+                this.modalService.error({
+                    nzTitle: "Error",
+                    nzContent: error?.error?.error?.message
+                });
             }
         });
     }

@@ -1,5 +1,5 @@
-<aside class="z-30 flex-shrink-0 hidden w-64 overflow-y-auto bg-white lg:block">
-    <div class="py-4 text-gray-500">
+<aside class="z-30 flex-shrink-0 hidden w-64 overflow-y-auto bg-white lg:block h-screen">
+    <div class="py-4 text-gray-500 h-full">
         <a class="text-lg font-bold flex items-center justify-center w-full" routerLink="home">
             <img src="./assets/img/brand.svg" alt="Mascota Feliz" class="h-10" />
         </a>
@@ -11,7 +11,6 @@
                     routerLinkActive="text-gray-800"
                     [routerLinkActiveOptions]="{ exact: true }"
                     aria-current="page">
-                    <span class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg" aria-hidden="true"></span>
                     <svg
                         fill="none"
                         stroke-linecap="round"
@@ -68,9 +67,9 @@
         <div class="px-6 my-6">
             <button
                 class="align-bottom inline-flex items-center justify-center cursor-pointer leading-5 transition-colors duration-150 font-medium focus:outline-none px-4 py-2 rounded-lg text-sm text-white bg-purple-600 border border-transparent active:bg-purple-600 hover:bg-purple-700 focus:shadow-outline-purple"
-                type="button">
-                Salir
-                <span class="ml-2" aria-hidden="true">+</span>
+                type="button"
+                (click)="logout()">
+                Cerrar Sesión
             </button>
         </div>
     </div>

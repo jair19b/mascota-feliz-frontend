@@ -10,13 +10,13 @@ export class HttpServiceService {
 
     constructor(private http: HttpClient) {}
 
-    modificarDatosFilter(url: string, data: any, filtro: any): Observable<any> {
-        // let token = localStorage.getItem("token") || "";
-        const _headers = new HttpHeaders({ "Content-type": "application/json;charset=utf-8" });
+    modificarDatosFilter(path: string, data: any, filtro: any): Observable<any> {
+        let token = localStorage.getItem("token") || "";
+        const _headers = new HttpHeaders({ "Content-type": "application/json;charset=utf-8", authorization: `bearer ${token}` });
         const parametros = new HttpParams().append("filter", JSON.stringify(filtro));
         const opcionesHttp = { params: parametros, headers: _headers };
         const convertirJson = JSON.stringify(data);
-        return this.http.patch(url, convertirJson, opcionesHttp);
+        return this.http.patch(this.url + path, convertirJson, opcionesHttp);
     }
 
     obetenerDatosFilter(path: string, filtro: any): Observable<any> {

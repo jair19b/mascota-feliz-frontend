@@ -1,1 +1,101 @@
-<p>form-edit-user works!</p>
+<h1 class="my-6 text-2xl font-semibold text-gray-70">Editar Usuario</h1>
+<form class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md" [formGroup]="userForm" (ngSubmit)="enviar()">
+    <h2 class="mb-4 text-lg font-semibold text-gray-600">Campos que se pueden editar</h2>
+    <nz-alert nzType="error" nzMessage="{{ errorM }}" nzShowIcon *ngIf="errorM"></nz-alert>
+    <nz-alert nzType="success" nzMessage="{{ successM }}" nzShowIcon *ngIf="successM"></nz-alert>
+
+    <!-- datos de mascota -->
+    <div class="{{ campoEsValido('locationId') ? 'input-group error' : 'input-group' }}">
+        <select class="control-input icon-right" formControlName="locationId">
+            <option value="" selected>Sede</option>
+            <option *ngFor="let sede of sedes" value="{{ sede.id }}">{{ sede.name }}</option>
+        </select>
+        <span class="input-message" *ngIf="campoEsValido('locationId')">{{ getError("locationId") }}</span>
+    </div>
+
+    <div class="form-group group-two mt-4">
+        <div class="{{ campoEsValido('status') ? 'input-group error' : 'input-group' }}">
+            <select class="control-input icon-right" formControlName="status">
+                <option value="">Estado del Usuario</option>
+                <option value="unverified">No verificado</option>
+                <option value="block">Bloqueado</option>
+                <option value="active">Activo</option>
+            </select>
+            <label class="input-icon"><span class="bi bi-chevron-expand"></span></label>
+            <span class="input-message" *ngIf="campoEsValido('status')">{{ getError("status") }}</span>
+        </div>
+
+        <div class="{{ campoEsValido('cedula') ? 'input-group error' : 'input-group' }}">
+            <input type="text" class="control-input icon-left" placeholder="Cedula" formControlName="cedula" />
+            <label class="input-icon"><span class="bi bi-person-circle"></span></label>
+            <span class="input-message" *ngIf="campoEsValido('cedula')">{{ getError("cedula") }}</span>
+        </div>
+
+        <div class="{{ campoEsValido('name') ? 'input-group error' : 'input-group' }}">
+            <input type="text" class="control-input icon-left" placeholder="Nombres" formControlName="name" />
+            <label class="input-icon"><span class="bi bi-person-circle"></span></label>
+            <span class="input-message" *ngIf="campoEsValido('name')">{{ getError("name") }}</span>
+        </div>
+
+        <div class="{{ campoEsValido('lastName') ? 'input-group error' : 'input-group' }}">
+            <input type="text" class="control-input icon-left" placeholder="Apellidos" formControlName="lastName" />
+            <label class="input-icon"><span class="bi bi-person-circle"></span></label>
+            <span class="input-message" *ngIf="campoEsValido('lastName')">{{ getError("lastName") }}</span>
+        </div>
+
+        <div class="{{ campoEsValido('birthday') ? 'input-group error' : 'input-group' }}">
+            <input type="date" class="control-input" placeholder="Fecha Nacimiento" formControlName="birthday" />
+            <span class="input-message" *ngIf="campoEsValido('birthday')">{{ getError("birthday") }}</span>
+        </div>
+
+        <div class="{{ campoEsValido('gender') ? 'input-group error' : 'input-group' }}">
+            <select class="control-input icon-right" formControlName="gender">
+                <option value="">Sexo</option>
+                <option value="M">Nasculino</option>
+                <option value="F">Femenino</option>
+                <option value="O">Otro</option>
+            </select>
+            <label class="input-icon"><span class="bi bi-chevron-expand"></span></label>
+            <span class="input-message" *ngIf="campoEsValido('gender')">{{ getError("gender") }}</span>
+        </div>
+
+        <div class="{{ campoEsValido('cellphone') ? 'input-group error' : 'input-group' }}">
+            <input type="text" class="control-input icon-left" placeholder="Telefono" formControlName="cellphone" />
+            <label class="input-icon"><span class="bi bi-telephone"></span></label>
+            <span class="input-message" *ngIf="campoEsValido('cellphone')">{{ getError("cellphone") }}</span>
+        </div>
+
+        <div class="{{ campoEsValido('city') ? 'input-group error' : 'input-group' }}">
+            <input type="text" class="control-input icon-left" placeholder="Ciudad" formControlName="city" />
+            <label class="input-icon"><span class="bi bi-building-fill"></span></label>
+            <span class="input-message" *ngIf="campoEsValido('city')">{{ getError("city") }}</span>
+        </div>
+
+        <div class="{{ campoEsValido('address') ? 'input-group error' : 'input-group' }}">
+            <input type="text" class="control-input icon-left" placeholder="Dirección" formControlName="address" />
+            <label class="input-icon"><span class="bi bi-card-front-fill"></span></label>
+            <span class="input-message" *ngIf="campoEsValido('address')">{{ getError("address") }}</span>
+        </div>
+    </div>
+
+    <div class="{{ campoEsValido('email') ? 'input-group error' : 'input-group' }}">
+        <input type="email" class="control-input icon-left" placeholder="Correo electrónico" formControlName="email" />
+        <label class="input-icon"><span class="bi bi-envelope-fill"></span></label>
+        <span class="input-message" *ngIf="campoEsValido('email')">{{ getError("email") }}</span>
+    </div>
+
+    <div class="{{ campoEsValido('rol') ? 'input-group error' : 'input-group' }}">
+        <select class="control-input icon-right" formControlName="rol">
+            <option value="">Rol de usuario</option>
+            <option value="admin">Administrador</option>
+            <option value="advisor">Asesor</option>
+            <option value="cliente">Cliente</option>
+        </select>
+        <label class="input-icon"><span class="bi bi-chevron-expand"></span></label>
+        <span class="input-message" *ngIf="campoEsValido('rol')">{{ getError("rol") }}</span>
+    </div>
+
+    <div class="my-7">
+        <button type="submit" class="btn btn-primary">Registrar Editar</button>
+    </div>
+</form>

@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { HttpServiceService } from "./../../services/http-service.service";
 import { NzModalService } from "ng-zorro-antd/modal";
+import { AuthService } from "./../../services/auth.service";
+const moment = require("moment");
 
 @Component({
     selector: "app-listar",
@@ -11,10 +13,14 @@ export class ListarComponent implements OnInit {
     revisiones: any[] = [];
     isVisible = false;
 
-    constructor(public httpServiceService: HttpServiceService, private modalService: NzModalService) {}
+    get user() {
+        return this.authService.user;
+    }
+
+    constructor(public httpServiceService: HttpServiceService, private modalService: NzModalService, private authService: AuthService) {}
 
     ngOnInit(): void {
-        const filtro = { where: { state: "pending" }, include: [{ relation: "pet" }] };
+        const filtro = { where: { ownerId: this.user.uid }, include: [{ relation: "pet" }] };
         this.httpServiceService.obetenerDatosFilter("requests", filtro).subscribe({
             next: response => {
                 console.log(response);
@@ -49,9 +55,14 @@ export class ListarComponent implements OnInit {
                             this.revisiones = copia;
                             resolve(true);
                         },
-                        error: err => reject(false)
+                        error: err => reject(err)
                     });
-                }).catch(() => console.error("Error al momneto de cerrar el modal"))
+                }).catch(err =>
+                    this.modalService.error({
+                        nzTitle: "Error",
+                        nzContent: err.error.error.message
+                    })
+                )
         });
     }
 
@@ -65,5 +76,9 @@ export class ListarComponent implements OnInit {
 
     handleCancel(): void {
         this.isVisible = false;
+    }
+
+    formatDate(date: string) {
+        return moment(date).startOf("day").fromNow();
     }
 }

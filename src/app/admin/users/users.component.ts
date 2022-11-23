@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { HttpServiceService } from "../../services/http-service.service";
 import { NzModalService } from "ng-zorro-antd/modal";
 
@@ -10,6 +10,12 @@ import { NzModalService } from "ng-zorro-antd/modal";
 export class UsersComponent implements OnInit {
     revisiones: any[] = [];
     isVisible = false;
+    isEditing = false;
+    private _editingUser: any;
+
+    get editingUser() {
+        return { ...this._editingUser };
+    }
 
     constructor(public httpServiceService: HttpServiceService, private modalService: NzModalService) {}
 
@@ -61,7 +67,7 @@ export class UsersComponent implements OnInit {
     }
 
     showModal(): void {
-        this.isVisible = true;
+        this.isVisible = !this.isVisible;
     }
 
     handleOk(): void {
@@ -70,5 +76,30 @@ export class UsersComponent implements OnInit {
 
     handleCancel(): void {
         this.isVisible = false;
+    }
+
+    editarUser(user: any) {
+        this._editingUser = user;
+        this.isVisible = true;
+        this.isEditing = true;
+    }
+
+    switchState() {
+        this._editingUser = null;
+        this.isVisible = false;
+        this.isEditing = false;
+    }
+
+    updateList(event: any) {
+        console.log(event);
+        const copia = JSON.parse(JSON.stringify(this.revisiones));
+        for (let i in copia) {
+            if (copia[i].id == event.id) {
+                copia.splice(i, 1, event);
+                break;
+            }
+        }
+        this.revisiones = copia;
+        this.switchState();
     }
 }

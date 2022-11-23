@@ -37,7 +37,7 @@ export class AfiliarComponent implements OnInit {
 
     ngOnInit(): void {
         this.requestForm.get("date")?.setValue(Date.now());
-        this.httpService.obetenerDatosFilter("users", { where: { rol: "client" } }).subscribe({
+        this.httpService.obetenerDatosFilter("users", { where: { rol: "cliente" } }).subscribe({
             next: res => (this.users = res),
             error: err => console.error(err)
         });

@@ -38,7 +38,7 @@ export class AuthService {
                     if (response.rol == "advisor") {
                         this.router.navigate(["advisor"]);
                     }
-                    if (response.rol == "client") {
+                    if (response.rol == "cliente") {
                         this.router.navigate(["user"]);
                     }
                 }
@@ -82,7 +82,7 @@ export class AuthService {
             if (this.user?.rol == "advisor") {
                 this.router.navigate(["advisor"]);
             }
-            if (this.user?.rol == "client") {
+            if (this.user?.rol == "cliente") {
                 this.router.navigate(["user"]);
             }
         }
