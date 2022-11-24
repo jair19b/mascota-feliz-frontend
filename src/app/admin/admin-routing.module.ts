@@ -15,6 +15,7 @@ export const routes: Routes = [
             { path: "administrar", component: AdministrarComponent },
             { path: "users", component: UsersComponent },
             { path: "productos", component: PedidosComponent },
+            { path: "my-list", component: PedidosComponent },
             { path: "**", component: ListarComponent }
         ]
     }

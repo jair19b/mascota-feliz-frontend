@@ -1,6 +1,9 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { AdminAuthGuard } from "./auth/val-auth.guard";
+import { AdminGuard } from "./guards/admin.guard";
+import { AdvisorGuard } from "./guards/avisor.guard";
+import { LoginGuard } from "./guards/login.guard";
+import { UserGuard } from "./guards/user.guard";
 import { IndexComponent } from "./home/components/index.component";
 
 const routes: Routes = [
@@ -11,23 +14,31 @@ const routes: Routes = [
     },
     {
         path: "auth",
-        loadChildren: () => import("./auth/auth.module").then(m => m.AuthModule)
+        loadChildren: () => import("./auth/auth.module").then(m => m.AuthModule),
+        canActivate: [LoginGuard],
+        canLoad: [LoginGuard]
     },
     {
         path: "dashboard",
         loadChildren: () => import("./admin/admin.module").then(m => m.AdminModule),
-        canActivate: [AdminAuthGuard],
-        canLoad: [AdminAuthGuard]
+        canActivate: [AdminGuard],
+        canLoad: [AdminGuard]
+    },
+    {
+        path: "advisor",
+        loadChildren: () => import("./admin/admin.module").then(m => m.AdminModule),
+        canActivate: [AdvisorGuard],
+        canLoad: [AdvisorGuard]
     },
     {
         path: "user",
         loadChildren: () => import("./client/client.module").then(m => m.ClientModule),
-        canActivate: [AdminAuthGuard],
-        canLoad: [AdminAuthGuard]
+        canActivate: [UserGuard],
+        canLoad: [UserGuard]
     },
     {
         path: "**",
-        component: IndexComponent
+        redirectTo: ""
     }
 ];
 

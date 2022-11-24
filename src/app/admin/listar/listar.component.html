@@ -40,7 +40,7 @@
                         <span class="text-sm">{{ formatDate(revision.date) }}</span>
                     </td>
                     <td class="px-4 py-3">
-                        <div class="flex items-center space-x-4">
+                        <div class="flex items-center space-x-4" *ngIf="user.rol == 'admin'">
                             <button
                                 class="align-bottom inline-flex items-center justify-center cursor-pointer leading-5 transition-colors duration-150 font-medium focus:outline-none text-gray-600 dark:text-gray-400 focus:outline-none border border-transparent active:bg-transparent hover:bg-gray-100 focus:shadow-outline-gray dark:hover:bg-gray-500 dark:hover:text-gray-300 dark:hover:bg-opacity-10"
                                 type="button"
@@ -62,23 +62,15 @@
                                         clip-rule="evenodd"></path>
                                 </svg>
                             </button>
+                        </div>
 
-                            <div>
-                                <nz-modal
-                                    [(nzVisible)]="isVisible"
-                                    nzTitle="Modal"
-                                    nzOkText="Ok"
-                                    nzCancelText="Cancel"
-                                    (nzOnOk)="handleOk()"
-                                    (nzOnCancel)="handleCancel()">
-                                    <ng-container *nzModalContent>
-                                        <p>Bla bla ...</p>
-                                        <p>Bla bla ...</p>
-                                        <p>Bla bla ...</p>
-                                    </ng-container>
-                                </nz-modal>
-                            </div>
-                            <br />
+                        <div class="flex items-center space-x-4" *ngIf="user.rol != 'admin' && revision.state == 'pending'">
+                            <button type="button" (click)="showModal(revision, true)" class="btn btn-primary btn-sm">Aceptar</button>
+                            <button type="button" (click)="showModal(revision, false)" class="btn btn-danger btn-sm">Rechazar</button>
+                        </div>
+
+                        <div class="flex items-center space-x-4" *ngIf="user.rol != 'admin' && revision.state != 'pending'">
+                            <span class="text-sm">{{ revision.state }} {{ formatDate(revision.updatedAt) }}</span>
                         </div>
                     </td>
                 </tr>
@@ -86,3 +78,21 @@
         </table>
     </div>
 </div>
+
+<nz-modal
+    [(nzVisible)]="isVisible"
+    nzTitle="Acciones"
+    nzOkText="Actualizar"
+    nzCancelText="Cancelar"
+    (nzOnOk)="handleOk()"
+    (nzOnCancel)="handleCancel()">
+    <ng-container *nzModalContent>
+        <form [formGroup]="formEdit">
+            <label class="text-lg font-bold mb-5">Detalles de la decición</label>
+            <div class="{{ campoEsValido('details') ? 'input-group error' : 'input-group' }}">
+                <textarea class="control-input" placeholder="Detalles de la accion" formControlName="details" rows="5"></textarea>
+                <span class="input-message" *ngIf="campoEsValido('details')">{{ getError("details") }}</span>
+            </div>
+        </form>
+    </ng-container>
+</nz-modal>

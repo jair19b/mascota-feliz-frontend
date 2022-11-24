@@ -51,12 +51,12 @@ export class FormEditUserComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.userForm.get("date")?.setValue(Date.now());
         this.httpService.obetenerDatosFilter("sede", {}).subscribe({
             next: res => (this.sedes = res),
             error: err => console.error(err)
         });
 
+        console.log(this.currentUser);
         this.userForm.reset({ ...this.currentUser });
     }
 

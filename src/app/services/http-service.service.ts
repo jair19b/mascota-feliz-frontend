@@ -41,4 +41,12 @@ export class HttpServiceService {
         const opcionesHttp = { headers: _headers };
         return this.http.delete(this.url + path, opcionesHttp);
     }
+
+    modificarDatos(path: string, data: any): Observable<any> {
+        let token = localStorage.getItem("token") || "";
+        const _headers = new HttpHeaders({ "Content-type": "application/json;charset=utf-8", authorization: `bearer ${token}` });
+        const opcionesHttp = { headers: _headers };
+        const convertirJson = JSON.stringify(data);
+        return this.http.patch(this.url + path, convertirJson, opcionesHttp);
+    }
 }

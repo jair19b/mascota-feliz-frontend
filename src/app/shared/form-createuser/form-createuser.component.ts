@@ -50,7 +50,6 @@ export class FormCreateuserComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.userForm.get("date")?.setValue(Date.now());
         this.httpService.obetenerDatosFilter("sede", {}).subscribe({
             next: res => (this.sedes = res),
             error: err => console.error(err)

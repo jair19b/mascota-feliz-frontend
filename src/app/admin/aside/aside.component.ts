@@ -7,6 +7,10 @@ import { AuthService } from "./../../services/auth.service";
     styleUrls: ["./aside.component.scss"]
 })
 export class AsideComponent implements OnInit {
+    get user() {
+        return this.authService.user;
+    }
+
     constructor(private authService: AuthService) {}
 
     ngOnInit(): void {}

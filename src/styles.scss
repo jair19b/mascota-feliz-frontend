@@ -12,6 +12,10 @@
     text-decoration: none;
 }
 
+.btn-sm {
+    @apply py-1.5 px-2 rounded-md;
+}
+
 .btn:disabled {
     cursor: not-allowed;
     pointer-events: none;
@@ -34,9 +38,14 @@
     @apply border-zinc-400 bg-zinc-400 text-white hover:bg-zinc-500 hover:border-zinc-500;
 }
 
+.btn-danger {
+    @apply border-pink-600 bg-pink-600 text-white hover:bg-pink-700 hover:border-pink-700;
+}
+
 .input-group {
     @apply relative text-gray-500 focus-within:text-sky-500;
 }
+
 
 .form-group {
     display: flex;
