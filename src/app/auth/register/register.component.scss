@@ -1,5 +1,5 @@
 .main-content-centered {
-  @apply flex justify-center items-center;
+  @apply flex justify-center items-center shadow;
   min-height: calc(100vh - 3.75rem);
   padding: 6rem 0;
 }

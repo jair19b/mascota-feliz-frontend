@@ -6,9 +6,11 @@ import { VerifyComponent } from "./verify/verify.component";
 import { AuthRoutingModule } from "./auth-routing.module";
 import { ReactiveFormsModule } from "@angular/forms";
 import { NzAlertModule } from "ng-zorro-antd/alert";
+import { ForgotComponent } from './forgot/forgot.component';
+import { UpdatePasswordComponent } from './update-password/update-password.component';
 
 @NgModule({
-    declarations: [LoginComponent, RegisterComponent, VerifyComponent],
+    declarations: [LoginComponent, RegisterComponent, VerifyComponent, ForgotComponent, UpdatePasswordComponent],
     imports: [CommonModule, AuthRoutingModule, ReactiveFormsModule, NzAlertModule],
     exports: []
 })

@@ -129,7 +129,7 @@ export class ListarComponent implements OnInit {
 
     adAction(solicitud: any): void {
         const newD = this.formEdit.getRawValue();
-        this.http.modificarDatos(`requests/${solicitud.id}`, newD).subscribe({
+        this.http.modificarDatos(`requests/state/${solicitud.id}`, newD).subscribe({
             next: response => {
                 this.revisiones = this.updateLocalData({ ...solicitud, ...newD });
                 this.isVisible = false;

@@ -6,6 +6,7 @@ import { HttpServiceService } from "./../../services/http-service.service";
 import { NzModalService } from "ng-zorro-antd/modal";
 import { Router } from "@angular/router";
 import { AuthService } from "./../../services/auth.service";
+const moment = require("moment");
 
 @Component({
     selector: "app-afiliar",
@@ -45,7 +46,7 @@ export class AfiliarComponent implements OnInit {
     ngOnInit(): void {
         this._user = this.authService.user;
         this.requestForm.get("ownerId")?.setValue(this._user.uid);
-        this.requestForm.get("date")?.setValue(Date.now());
+        this.requestForm.get("date")?.setValue(moment().format("YYYY-MM-DDTHH:mm:ss.SSS"));
     }
 
     campoEsValido(campo: string) {

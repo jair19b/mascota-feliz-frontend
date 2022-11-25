@@ -81,6 +81,6 @@ export class ListarComponent implements OnInit {
     }
 
     formatDate(date: string) {
-        return moment(date).startOf("day").fromNow();
+        return moment(date).fromNow();
     }
 }

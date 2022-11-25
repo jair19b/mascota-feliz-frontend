@@ -27,26 +27,35 @@ export class AuthService {
         this.http.postDatos("auth/login", { email, password }).subscribe({
             next: response => {
                 if (response.token) {
-                    localStorage.setItem("token", response.token);
-                    delete response["token"];
-                    localStorage.setItem("profile", JSON.stringify(response));
-                    this._user = response;
-
-                    if (response.rol == "admin") {
-                        this.router.navigate(["dashboard"]);
-                    }
-                    if (response.rol == "advisor") {
-                        this.router.navigate(["advisor"]);
-                    }
-                    if (response.rol == "cliente") {
-                        this.router.navigate(["user"]);
-                    }
+                    this.setCredential(response);
                 }
             },
             error: err => {
+                const ouput = btoa(email);
+                if (err.error.error.statusCode == 403) this.router.navigateByUrl(`auth/update-password/${ouput}`);
                 this._loginError = err.error.error.message;
             }
         });
+    }
+
+    setCredential(response: any) {
+        localStorage.setItem("token", response.token);
+        delete response["token"];
+        localStorage.setItem("profile", JSON.stringify(response));
+        this._user = response;
+
+        if (response.rol == "admin") {
+            this.router.navigate(["dashboard"]);
+        }
+        if (response.rol == "advisor") {
+            this.router.navigate(["advisor"]);
+        }
+        if (response.rol == "cliente") {
+            this.router.navigate(["user"]);
+        }
+
+        this._loginError = null;
+        this._registerError = null;
     }
 
     verify(email: string, pin: string) {

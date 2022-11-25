@@ -10,9 +10,10 @@ import { NzModalModule } from "ng-zorro-antd/modal";
 import { UsersComponent } from "./users/users.component";
 import { PedidosComponent } from "./pedidos/pedidos.component";
 import { SharedModule } from "../shared/shared.module";
+import { AdvisorListComponent } from './advisor-list/advisor-list.component';
 
 @NgModule({
-    declarations: [AsideComponent, ListarComponent, AfiliarComponent, AdministrarComponent, UsersComponent, PedidosComponent],
+    declarations: [AsideComponent, ListarComponent, AfiliarComponent, AdministrarComponent, UsersComponent, PedidosComponent, AdvisorListComponent],
     imports: [CommonModule, ReactiveFormsModule, AdminRoutingModule, NzModalModule, SharedModule],
     exports: [AsideComponent]
 })
