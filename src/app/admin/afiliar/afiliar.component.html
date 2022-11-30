@@ -53,6 +53,8 @@
         <span class="input-message" *ngIf="campoEsValido('description')">{{ getError("description") }}</span>
     </div>
 
+    <app-form-photo-pet (imageFileName)="setPhoto($event)"></app-form-photo-pet>
+
     <!-- <div class="input-group">
         <input type="file" class="control-input icon-left" placeholder="Nombre" formControlName="photo" />
         <label class="input-icon"><span class="bi bi-person-circle"></span></label>

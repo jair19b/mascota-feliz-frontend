@@ -32,14 +32,6 @@
                 <tr *ngFor="let revision of revisiones">
                     <td class="px-4 py-3">
                         <div class="flex items-center text-sm">
-                            <div class="relative rounded-full inline-block w-8 h-8 hidden mr-3 md:block">
-                                <img
-                                    class="object-cover w-full h-full rounded-full"
-                                    src="https://s3.amazonaws.com/uifaces/faces/twitter/lokesh_coder/128.jpg"
-                                    alt="User image"
-                                    loading="lazy" />
-                                <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
-                            </div>
                             <div>
                                 <p class="font-semibold">{{ revision.name }}</p>
                                 <p class="text-xs text-gray-600">{{ revision.lastName }}</p>

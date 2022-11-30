@@ -5,6 +5,7 @@ import { FormBuilder } from "@angular/forms";
 import { HttpServiceService } from "./../../services/http-service.service";
 import { Router } from "@angular/router";
 import { NzModalService } from "ng-zorro-antd/modal";
+const moment = require("moment");
 
 @Component({
     selector: "admin-afiliar",
@@ -20,6 +21,7 @@ export class AfiliarComponent implements OnInit {
         city: ["", this.vs.validName],
         address: ["", this.vs.validAddress],
         date: [""],
+        photo: [""],
         description: ["", this.vs.validRequired],
         ownerId: ["", this.vs.validRequired]
     });
@@ -36,7 +38,7 @@ export class AfiliarComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.requestForm.get("date")?.setValue(Date.now());
+        this.requestForm.get("date")?.setValue(moment().format("YYYY-MM-DDTHH:mm:ss.SSS"));
         this.httpService.obetenerDatosFilter("users", { where: { rol: "cliente" } }).subscribe({
             next: res => (this.users = res),
             error: err => console.error(err)
@@ -71,5 +73,9 @@ export class AfiliarComponent implements OnInit {
                 });
             }
         });
+    }
+
+    setPhoto(name: string) {
+        this.requestForm.controls["photo"].setValue(name);
     }
 }

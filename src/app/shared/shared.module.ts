@@ -5,10 +5,11 @@ import { FormEditUserComponent } from "./form-edit-user/form-edit-user.component
 import { ReactiveFormsModule } from "@angular/forms";
 import { NzAlertModule } from "ng-zorro-antd/alert";
 import { NzModalModule } from "ng-zorro-antd/modal";
+import { FormPhotoPetComponent } from "./form-photo-pet/form-photo-pet.component";
 
 @NgModule({
-    declarations: [FormCreateuserComponent, FormEditUserComponent],
+    declarations: [FormCreateuserComponent, FormEditUserComponent, FormPhotoPetComponent],
     imports: [CommonModule, ReactiveFormsModule, NzModalModule, NzAlertModule],
-    exports: [FormCreateuserComponent, FormEditUserComponent]
+    exports: [FormCreateuserComponent, FormEditUserComponent, FormPhotoPetComponent]
 })
 export class SharedModule {}

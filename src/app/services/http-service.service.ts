@@ -1,12 +1,14 @@
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { UploadedFile } from "../interfaces";
 
 @Injectable({
     providedIn: "root"
 })
 export class HttpServiceService {
-    private url = "https://mascota-feliz-backend-production.up.railway.app/";
+    // private url = "https://mascota-feliz-backend-production.up.railway.app/";
+    private url = "http://localhost:3000/";
 
     constructor(private http: HttpClient) {}
 
@@ -48,5 +50,11 @@ export class HttpServiceService {
         const opcionesHttp = { headers: _headers };
         const convertirJson = JSON.stringify(data);
         return this.http.patch(this.url + path, convertirJson, opcionesHttp);
+    }
+
+    sendFiles(form: FormData): Observable<UploadedFile> {
+        let token = localStorage.getItem("token") || "";
+        const headers = new HttpHeaders({ authorization: `bearer ${token}` });
+        return this.http.post<UploadedFile>(this.url + `pets/upload/photo`, form, { headers: headers });
     }
 }

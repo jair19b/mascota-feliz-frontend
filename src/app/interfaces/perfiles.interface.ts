@@ -4,3 +4,7 @@ export interface UserProfile {
     rol: string;
     uid: string;
 }
+
+export interface UploadedFile {
+    filename: string;
+}

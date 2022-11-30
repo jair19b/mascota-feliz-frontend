@@ -1,0 +1,10 @@
+<form [formGroup]="photoForm" class="my- flex jutify-between">
+    <div class="{{ errorM ? 'input-group w-[80%] error' : 'input-group w-[80%]' }}">
+        <input type="file" class="control-input icon-left" name="image" (change)="changeImage($event)" />
+        <label class="input-icon"><span class="bi bi-card-image"></span></label>
+        <span class="input-message" *ngIf="errorM">{{ errorM }}</span>
+    </div>
+    <div class="flex justify-center items-center w-[19%]">
+        <button class="btn btn-primary" type="button" (click)="submitPhoto()">Cargar Imagen</button>
+    </div>
+</form>
