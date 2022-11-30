@@ -1,5 +1,5 @@
 <main class="main-content-centered">
-    <div class="rounded-lg bg-white text-black p-5 w-[56%]">
+    <div class="rounded-lg bg-white text-black p-5 w-[56%] shadow">
         <img src="/assets/img/brand.svg" alt="brand" class="w-36 mb-9 mx-auto" />
         <h1 class="text-center font-bold text-xl my-8">Crear Cuenta</h1>
         <nz-alert nzType="error" nzMessage="{{ errorM }}" nzShowIcon *ngIf="errorM"></nz-alert>
@@ -39,6 +39,7 @@
                         <option value="">Selecciona tu sexo</option>
                         <option value="M">Masculino</option>
                         <option value="F">Femenino</option>
+                        <option value="O">otro</option>
                     </select>
                     <span class="input-message" *ngIf="campoEsValido('gender')">{{ getError("gender") }}</span>
                 </div>

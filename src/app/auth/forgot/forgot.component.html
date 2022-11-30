@@ -1,10 +1,10 @@
 <main class="main-content-centered">
     <div class="rounded-lg bg-white text-black p-5 w-[30%] shadow">
         <img src="/assets/img/brand.svg" alt="brand" class="w-36 mb-9 mx-auto" />
-        <h1 class="text-center font-bold text-xl my-8">Recuperacion de Contraseña</h1>
+        <h1 class="text-center font-bold text-xl my-6">Recuperacion de Contraseña</h1>
         <nz-alert nzType="error" nzMessage="{{ errorM }}" nzShowIcon *ngIf="errorM"></nz-alert>
         <nz-alert nzType="success" nzMessage="{{ successM }}" nzShowIcon *ngIf="successM"></nz-alert>
-        <p class="my3">Sistea de recueperacion de contraseñas. Por favor ingresa los datos requeridos para este proceso</p>
+        <p class="my-3">Sistema de recuperación de contraseñas. Por favor ingresa los datos requeridos para este proceso</p>
         <form [formGroup]="formLogin" (ngSubmit)="enviar()">
             <div class="{{ campoEsValido('email') ? 'input-group error' : 'input-group' }}" *ngIf="paste == 1">
                 <input type="email" class="control-input icon-right" formControlName="email" placeholder="Correo electrónico" />

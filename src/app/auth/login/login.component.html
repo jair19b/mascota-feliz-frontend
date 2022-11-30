@@ -1,7 +1,7 @@
 <main class="main-content-centered">
     <div class="rounded-lg bg-white text-black p-5 w-[30%]">
         <img src="/assets/img/brand.svg" alt="brand" class="w-36 mb-9 mx-auto" />
-        <h1 class="text-center font-bold text-xl my-8">Iniciar Sesión</h1>
+        <h1 class="text-center font-bold text-xl my-6">Iniciar Sesión</h1>
         <nz-alert nzType="error" nzMessage="{{ errorM }}" nzShowIcon *ngIf="errorM"></nz-alert>
         <form [formGroup]="formLogin" (ngSubmit)="enviar()">
             <div class="{{ campoEsValido('email') ? 'input-group error' : 'input-group' }}">
@@ -16,12 +16,14 @@
                 <span class="input-message" *ngIf="campoEsValido('password')">{{ getError("password") }}</span>
             </div>
             <div class="py-8 text-center">
-                <a routerLink="auth/forgot-password" class="block">Olvidé mi contraseña</a>
-                <span>¿No eres cliente? <a routerLink="auth/register" class="text-sky-400">registrate como cliente</a></span>
+                <a routerLink="/auth/forgot-password" class="block">Olvidé mi contraseña</a>
+                <span>¿No eres cliente? <a routerLink="/auth/register" class="text-sky-400">registrate como cliente</a></span>
             </div>
-            <button type="submit" class="btn btn-primary block mx-auto">
-                Entrar a Mi Cuenta <span class="bi bi-arrow-right-short"></span>
-            </button>
+            <div class="flex justify-center items-center mt-5">
+                <button type="submit" class="btn btn-primary block mx-auto">
+                    Entrar a Mi Cuenta <span class="bi bi-arrow-right-short"></span>
+                </button>
+            </div>
         </form>
     </div>
 </main>

@@ -6,7 +6,7 @@ import { Observable } from "rxjs";
     providedIn: "root"
 })
 export class HttpServiceService {
-    url = "http://localhost:3000/";
+    private url = "https://mascota-feliz-backend-production.up.railway.app/";
 
     constructor(private http: HttpClient) {}
 
