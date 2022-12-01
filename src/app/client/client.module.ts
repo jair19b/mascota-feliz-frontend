@@ -7,10 +7,11 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { NzModalModule } from "ng-zorro-antd/modal";
 import { AsideComponent } from "./aside/aside.component";
 import { NzAlertModule } from "ng-zorro-antd/alert";
+import { SharedModule } from "../shared/shared.module";
 
 @NgModule({
     declarations: [ListarComponent, AfiliarComponent, AsideComponent],
-    imports: [CommonModule, ReactiveFormsModule, ClientRoutingModule, NzModalModule, NzAlertModule],
+    imports: [CommonModule, ReactiveFormsModule, ClientRoutingModule, NzModalModule, NzAlertModule, SharedModule],
     exports: [AsideComponent]
 })
 export class ClientModule {}

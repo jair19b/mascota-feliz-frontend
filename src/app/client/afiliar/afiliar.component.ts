@@ -22,6 +22,7 @@ export class AfiliarComponent implements OnInit {
         city: ["", this.vs.validName],
         address: ["", this.vs.validAddress],
         date: [""],
+        photo: [""],
         description: ["", this.vs.validRequired],
         ownerId: [""]
     });
@@ -55,7 +56,6 @@ export class AfiliarComponent implements OnInit {
 
     getError(campo: string): string {
         const error = this.requestForm.controls[campo].errors;
-
         return error ? error["message"] : null;
     }
 
@@ -91,5 +91,9 @@ export class AfiliarComponent implements OnInit {
                 });
             }
         });
+    }
+
+    setPhoto(name: string) {
+        this.requestForm.controls["photo"].setValue(name);
     }
 }

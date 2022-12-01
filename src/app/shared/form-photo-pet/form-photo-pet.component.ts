@@ -14,6 +14,9 @@ export class FormPhotoPetComponent implements OnInit {
         file: [""]
     });
 
+    textButton = "Cargar Foto";
+    visibleButton: boolean = true;
+
     @Input() errorM: any = null;
     @Output() imageFileName: EventEmitter<string> = new EventEmitter();
 
@@ -29,10 +32,13 @@ export class FormPhotoPetComponent implements OnInit {
     }
 
     submitPhoto() {
+        this.textButton = "Cargando...";
+        this.visibleButton = false;
         const form = new FormData();
         form.append("file", this.photoForm.controls["file"].value);
         this.httpService.sendFiles(form).subscribe({
             next: (resp: UploadedFile) => {
+                this.textButton = "Cargada";
                 this.imageFileName.emit(resp.filename);
             },
             error: err => (this.errorM = err.error.error.message)

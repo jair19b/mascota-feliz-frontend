@@ -1,10 +1,12 @@
-<h1 class="my-6 text-2xl font-semibold text-gray-70">Afiliar Mascota</h1>
+<h1 class="my-6 text-2xl font-semibold text-gray-70">Editar Mascota</h1>
 
 <form class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md" [formGroup]="requestForm" (ngSubmit)="enviar()">
-    <h2 class="mb-4 text-lg font-semibold text-gray-600">Datos necesarios para la solicitud</h2>
+    <h2 class="mb-4 text-lg font-semibold text-gray-600">Datos que se pueden editar</h2>
+    <nz-alert nzType="error" nzMessage="{{ errorM }}" nzShowIcon *ngIf="errorM"></nz-alert>
+    <nz-alert nzType="success" nzMessage="{{ successM }}" nzShowIcon *ngIf="successM"></nz-alert>
 
     <!-- datos de mascota -->
-    <nz-alert nzType="success" nzMessage="{{ errorM }}" nzShowIcon *ngIf="errorM"></nz-alert>
+
     <div class="form-group group-three mt-4">
         <div class="{{ campoEsValido('name') ? 'input-group error' : 'input-group' }}">
             <input type="text" class="control-input icon-left" placeholder="Nombre" formControlName="name" />
@@ -27,28 +29,13 @@
             <label class="input-icon"><span class="bi bi-palette-fill"></span></label>
             <span class="input-message" *ngIf="campoEsValido('color')">{{ getError("color") }}</span>
         </div>
-
-        <!-- datos de revision -->
-        <div class="{{ campoEsValido('city') ? 'input-group error' : 'input-group' }}">
-            <input type="text" class="control-input icon-left" placeholder="Ciudad" formControlName="city" />
-            <label class="input-icon"><span class="bi bi-buildings-fill"></span></label>
-            <span class="input-message" *ngIf="campoEsValido('city')">{{ getError("city") }}</span>
-        </div>
-        <div class="{{ campoEsValido('address') ? 'input-group error' : 'input-group' }}">
-            <input type="text" class="control-input icon-left" placeholder="Dirección" formControlName="address" />
-            <label class="input-icon"><span class="bi bi-car-front-fill"></span></label>
-            <span class="input-message" *ngIf="campoEsValido('address')">{{ getError("address") }}</span>
-        </div>
     </div>
-
     <div class="{{ campoEsValido('description') ? 'input-group error' : 'input-group' }}">
         <textarea class="control-input" placeholder="Una breve descripcion de tu mascota" formControlName="description"></textarea>
         <span class="input-message" *ngIf="campoEsValido('description')">{{ getError("description") }}</span>
     </div>
 
-    <app-form-photo-pet (imageFileName)="setPhoto($event)"></app-form-photo-pet>
-
     <div class="my-7">
-        <button type="submit" class="btn btn-primary">Afiliar Mascota</button>
+        <button type="submit" class="btn btn-primary">Actualizar Información</button>
     </div>
 </form>

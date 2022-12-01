@@ -14,8 +14,16 @@ const moment = require("moment");
 })
 export class ListarComponent implements OnInit {
     revisiones: any[] = [];
+    details: any;
     isVisible = false;
+    isVisibleD = false;
+    isEditing = false;
     private _editing: any;
+    private _petEditing: any;
+
+    get petEditing() {
+        return { ...this._petEditing };
+    }
 
     formEdit: FormGroup = this.fb.group({
         state: [""],
@@ -146,5 +154,40 @@ export class ListarComponent implements OnInit {
                 });
             }
         });
+    }
+
+    showModalD(e: any, datos: any): void {
+        this.details = datos;
+        this.isVisibleD = true;
+    }
+
+    handleOkD(): void {
+        this.isVisibleD = false;
+    }
+
+    handleCancelD(): void {
+        this.isVisibleD = false;
+    }
+
+    switchState() {
+        this._petEditing = null;
+        this.isEditing = false;
+    }
+
+    updateList(event: any) {
+        const copia = JSON.parse(JSON.stringify(this.revisiones));
+        for (let i in copia) {
+            if (copia[i].id == event.id) {
+                copia.splice(i, 1, event);
+                break;
+            }
+        }
+        this.revisiones = copia;
+        this.switchState();
+    }
+
+    editarPet(event: any, pet: any) {
+        this._petEditing = pet;
+        this.isEditing = true;
     }
 }

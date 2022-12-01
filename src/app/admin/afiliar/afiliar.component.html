@@ -38,12 +38,12 @@
         <!-- datos de revision -->
         <div class="{{ campoEsValido('city') ? 'input-group error' : 'input-group' }}">
             <input type="text" class="control-input icon-left" placeholder="Ciudad" formControlName="city" />
-            <label class="input-icon"><span class="bi bi-person-circle"></span></label>
+            <label class="input-icon"><span class="bi bi-buildings-fill"></span></label>
             <span class="input-message" *ngIf="campoEsValido('city')">{{ getError("city") }}</span>
         </div>
         <div class="{{ campoEsValido('address') ? 'input-group error' : 'input-group' }}">
             <input type="text" class="control-input icon-left" placeholder="Dirección" formControlName="address" />
-            <label class="input-icon"><span class="bi bi-person-circle"></span></label>
+            <label class="input-icon"><span class="bi bi-car-front-fill"></span></label>
             <span class="input-message" *ngIf="campoEsValido('address')">{{ getError("address") }}</span>
         </div>
     </div>
@@ -52,15 +52,7 @@
         <textarea class="control-input" placeholder="Una breve descripcion de tu mascota" formControlName="description"></textarea>
         <span class="input-message" *ngIf="campoEsValido('description')">{{ getError("description") }}</span>
     </div>
-
     <app-form-photo-pet (imageFileName)="setPhoto($event)"></app-form-photo-pet>
-
-    <!-- <div class="input-group">
-        <input type="file" class="control-input icon-left" placeholder="Nombre" formControlName="photo" />
-        <label class="input-icon"><span class="bi bi-person-circle"></span></label>
-        <span class="input-message" *ngIf="campoEsValido('photo')">{{ getError("nphoto") }}</span>
-    </div> -->
-
     <div class="my-7">
         <button type="submit" class="btn btn-primary">Afiliar Mascota</button>
     </div>

@@ -5,6 +5,7 @@
         <span class="input-message" *ngIf="errorM">{{ errorM }}</span>
     </div>
     <div class="flex justify-center items-center w-[19%]">
-        <button class="btn btn-primary" type="button" (click)="submitPhoto()">Cargar Imagen</button>
+        <button *ngIf="visibleButton" class="btn btn-primary" type="button" (click)="submitPhoto()">{{ textButton }}</button>
+        <button *ngIf="!visibleButton" class="btn btn-primary" type="button" disabled>{{ textButton }}</button>
     </div>
 </form>
